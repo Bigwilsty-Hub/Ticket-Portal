@@ -1,32 +1,148 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>World Cup Ticket Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ticket Portal</title>
 
 <style>
-
-html,body{
-margin:0;
-padding:0;
-background:black;
-height:100%;
-overflow:hidden;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #050505;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
-img{
-width:100vw;
-height:100vh;
-object-fit:contain;
+#loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px;
 }
 
+.card {
+  width: 100%;
+  max-width: 430px;
+  border: 1px solid #333;
+  border-radius: 18px;
+  padding: 30px 22px;
+  background: linear-gradient(180deg, #111, #050505);
+  box-shadow: 0 0 35px rgba(255,255,255,0.08);
+}
+
+.badge {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #f5c542;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 30px;
+  margin: 0 0 12px;
+}
+
+#status {
+  font-size: 17px;
+  color: #ddd;
+  margin: 25px 0 18px;
+}
+
+.bar {
+  height: 14px;
+  background: #222;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f5c542, #ffffff);
+  animation: load 3s forwards;
+}
+
+@keyframes load {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.small {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #999;
+}
+
+#reveal {
+  display: none;
+  height: 100vh;
+  background: black;
+  justify-content: center;
+  align-items: center;
+}
+
+#reveal img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+}
+
+.flash {
+  animation: shake 0.18s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(2px, 1px); }
+  25% { transform: translate(-2px, -1px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-1px, 2px); }
+  100% { transform: translate(1px, -1px); }
+}
 </style>
-
 </head>
 
 <body>
 
-<img src="Scary.png">
+<div id="loader">
+  <div class="card">
+    <div class="badge">VIP TICKET PORTAL</div>
+    <h1>World Cup 2026</h1>
+    <div id="status">Checking VIP ticket availability...</div>
+    <div class="bar">
+      <div class="fill"></div>
+    </div>
+    <div class="small">Do not close this page</div>
+  </div>
+</div>
+
+<div id="reveal">
+  <img src="Scary.png">
+</div>
+
+<script>
+const statusText = document.getElementById("status");
+
+setTimeout(() => {
+  statusText.innerText = "Verifying reservation details...";
+}, 1000);
+
+setTimeout(() => {
+  statusText.innerText = "Allocating premium seats...";
+}, 2000);
+
+setTimeout(() => {
+  document.body.classList.add("flash");
+}, 2900);
+
+setTimeout(() => {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("reveal").style.display = "flex";
+}, 3200);
+</script>
 
 </body>
 </html>

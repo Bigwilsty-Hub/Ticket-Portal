@@ -14,11 +14,9 @@ html, body {
   color: white;
 }
 
-body {
-  overflow-x: hidden;
-}
+body { overflow-x: hidden; }
 
-#loader {
+.screen {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -50,6 +48,22 @@ h1 {
   margin: 0 0 12px;
 }
 
+button {
+  margin-top: 22px;
+  padding: 15px 22px;
+  border: none;
+  border-radius: 12px;
+  background: #f5c542;
+  color: #111;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#loader, #blackout, #reveal {
+  display: none;
+}
+
 #status {
   font-size: 17px;
   color: #ddd;
@@ -67,6 +81,9 @@ h1 {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, #f5c542, #ffffff);
+}
+
+.loading {
   animation: load 3s forwards;
 }
 
@@ -82,13 +99,11 @@ h1 {
 }
 
 #blackout {
-  display: none;
   min-height: 100vh;
   background: black;
 }
 
 #reveal {
-  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -116,7 +131,7 @@ h1 {
   border-radius: 14px;
   opacity: 0;
   animation: showJoke 0.9s ease forwards;
-  animation-delay: 1.2s;
+  animation-delay: 1.8s;
 }
 
 .big {
@@ -157,13 +172,22 @@ h1 {
 
 <body>
 
-<div id="loader">
+<div id="start" class="screen">
+  <div class="card">
+    <div class="badge">VIP TICKET PORTAL</div>
+    <h1>World Cup 2026</h1>
+    <div class="small">Premium reservation access detected</div>
+    <button onclick="startPrank()">Start VIP Reservation</button>
+  </div>
+</div>
+
+<div id="loader" class="screen">
   <div class="card">
     <div class="badge">VIP TICKET PORTAL</div>
     <h1>World Cup 2026</h1>
     <div id="status">Checking FIFA ticket database...</div>
     <div class="bar">
-      <div class="fill"></div>
+      <div id="fill" class="fill"></div>
     </div>
     <div class="small">Do not close this page</div>
   </div>
@@ -179,35 +203,45 @@ h1 {
   </div>
 </div>
 
+<audio id="scream" preload="auto">
+  <source src="scream.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-const statusText = document.getElementById("status");
+function startPrank() {
+  const scream = document.getElementById("scream");
+  const statusText = document.getElementById("status");
 
-setTimeout(() => {
-  statusText.innerText = "Authenticating reservation...";
-}, 1000);
+  scream.load();
 
-setTimeout(() => {
-  statusText.innerText = "Confirming payment eligibility...";
-}, 2000);
+  document.getElementById("start").style.display = "none";
+  document.getElementById("loader").style.display = "flex";
+  document.getElementById("fill").classList.add("loading");
 
-setTimeout(() => {
+  setTimeout(() => {
+    statusText.innerText = "Authenticating reservation...";
+  }, 1000);
+
+  setTimeout(() => {
+    statusText.innerText = "Confirming payment eligibility...";
+  }, 2000);
+
+  setTimeout(() => {
     document.getElementById("loader").style.display = "none";
     document.getElementById("blackout").style.display = "block";
-}, 3200);
+  }, 3200);
 
-setTimeout(() => {
-    document.getElementById("scream").play().catch(() => {});
-}, 4350);
+  setTimeout(() => {
+    scream.currentTime = 0;
+    scream.play().catch(() => {});
+  }, 4350);
 
-setTimeout(() => {
+  setTimeout(() => {
     document.getElementById("blackout").style.display = "none";
     document.getElementById("reveal").style.display = "flex";
-}, 4400);
+  }, 4400);
+}
 </script>
-
-  <audio id="scream" preload="auto">
-    <source src="scream.mp3" type="audio/mpeg">
-</audio>
 
 </body>
 </html>

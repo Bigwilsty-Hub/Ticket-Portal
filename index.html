@@ -161,7 +161,7 @@ h1 {
   <div class="card">
     <div class="badge">VIP TICKET PORTAL</div>
     <h1>World Cup 2026</h1>
-    <div id="status">Checking VIP ticket availability...</div>
+    <div id="status">Checking FIFA ticket database...</div>
     <div class="bar">
       <div class="fill"></div>
     </div>
@@ -183,23 +183,31 @@ h1 {
 const statusText = document.getElementById("status");
 
 setTimeout(() => {
-  statusText.innerText = "Verifying reservation details...";
+  statusText.innerText = "Authenticating reservation...";
 }, 1000);
 
 setTimeout(() => {
-  statusText.innerText = "Allocating premium seats...";
+  statusText.innerText = "Confirming payment eligibility...";
 }, 2000);
 
 setTimeout(() => {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("blackout").style.display = "block";
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("blackout").style.display = "block";
 }, 3200);
 
 setTimeout(() => {
-  document.getElementById("blackout").style.display = "none";
-  document.getElementById("reveal").style.display = "flex";
-}, 3950);
+    document.getElementById("scream").play().catch(() => {});
+}, 4350);
+
+setTimeout(() => {
+    document.getElementById("blackout").style.display = "none";
+    document.getElementById("reveal").style.display = "flex";
+}, 4400);
 </script>
+
+  <audio id="scream" preload="auto">
+    <source src="scream.mp3" type="audio/mpeg">
+</audio>
 
 </body>
 </html>

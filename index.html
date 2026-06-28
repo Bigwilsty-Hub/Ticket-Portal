@@ -120,7 +120,7 @@ h1 {
 </div>
 
 <div id="reveal">
-  <img src="ScaryFace.png">
+  <img src="Scary.png">
 </div>
 
 <script>
@@ -133,6 +133,10 @@ setTimeout(() => {
 setTimeout(() => {
   statusText.innerText = "Allocating premium seats...";
 }, 2000);
+
+setTimeout(() => {
+  document.body.classList.add("flash");
+}, 2900);
 
 setTimeout(() => {
   document.getElementById("loader").style.display = "none";

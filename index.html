@@ -79,6 +79,7 @@ h1 {
 
 #reveal {
   display: none;
+  position: relative;
   height: 100vh;
   background: black;
   justify-content: center;
@@ -91,16 +92,36 @@ h1 {
   object-fit: contain;
 }
 
-.flash {
-  animation: shake 0.18s infinite;
+#joke {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
+  background: rgba(0,0,0,0.76);
+  padding: 18px;
+  border-radius: 14px;
+  opacity: 0;
+  animation: showJoke 1s ease forwards;
+  animation-delay: 1.5s;
 }
 
-@keyframes shake {
-  0% { transform: translate(2px, 1px); }
-  25% { transform: translate(-2px, -1px); }
-  50% { transform: translate(2px, -2px); }
-  75% { transform: translate(-1px, 2px); }
-  100% { transform: translate(1px, -1px); }
+.big {
+  font-size: clamp(24px, 5vw, 50px);
+  font-weight: bold;
+  color: #ff2a2a;
+}
+
+.smalljoke {
+  margin-top: 10px;
+  font-size: clamp(16px, 3vw, 26px);
+  color: white;
+}
+
+@keyframes showJoke {
+  to { opacity: 1; }
 }
 </style>
 </head>
@@ -121,6 +142,10 @@ h1 {
 
 <div id="reveal">
   <img src="Scary.png">
+  <div id="joke">
+    <div class="big">😂 So na you be the secret millionaire wey we get for this house?</div>
+    <div class="smalljoke">ABEG TINYERE FATHER IHE NA BOOT. 🤣🤣</div>
+  </div>
 </div>
 
 <script>
@@ -128,11 +153,11 @@ const statusText = document.getElementById("status");
 
 setTimeout(() => {
   statusText.innerText = "Verifying reservation details...";
-}, 1000);
+}, 1400);
 
 setTimeout(() => {
   statusText.innerText = "Allocating premium seats...";
-}, 2000);
+}, 2200);
 
 setTimeout(() => {
   document.getElementById("loader").style.display = "none";

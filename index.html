@@ -9,19 +9,23 @@ html, body {
   margin: 0;
   padding: 0;
   background: #050505;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
   font-family: Arial, sans-serif;
   color: white;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 #loader {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 25px;
+  box-sizing: border-box;
 }
 
 .card {
@@ -77,51 +81,76 @@ h1 {
   color: #999;
 }
 
+#blackout {
+  display: none;
+  min-height: 100vh;
+  background: black;
+}
+
 #reveal {
   display: none;
-  position: relative;
-  height: 100vh;
-  background: black;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: black;
+  min-height: 100vh;
+  padding: 18px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 #reveal img {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  max-width: 950px;
+  max-height: 68vh;
   object-fit: contain;
 }
 
 #joke {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+  width: 100%;
   max-width: 900px;
   text-align: center;
-  background: rgba(0,0,0,0.76);
-  padding: 18px;
+  margin-top: 22px;
+  background: rgba(0,0,0,0.78);
+  padding: 16px;
   border-radius: 14px;
   opacity: 0;
-  animation: showJoke 1s ease forwards;
-  animation-delay: 1.5s;
+  animation: showJoke 0.9s ease forwards;
+  animation-delay: 1.2s;
 }
 
 .big {
-  font-size: clamp(24px, 5vw, 50px);
+  font-size: clamp(24px, 6vw, 48px);
   font-weight: bold;
   color: #ff2a2a;
+  line-height: 1.15;
 }
 
 .smalljoke {
   margin-top: 10px;
-  font-size: clamp(16px, 3vw, 26px);
+  font-size: clamp(16px, 4vw, 25px);
   color: white;
+  line-height: 1.25;
 }
 
 @keyframes showJoke {
   to { opacity: 1; }
+}
+
+@media (max-height: 760px) {
+  #reveal {
+    justify-content: flex-start;
+    padding-top: 12px;
+  }
+
+  #reveal img {
+    max-height: 56vh;
+  }
+
+  #joke {
+    margin-top: 14px;
+    padding: 13px;
+  }
 }
 </style>
 </head>
@@ -140,11 +169,13 @@ h1 {
   </div>
 </div>
 
+<div id="blackout"></div>
+
 <div id="reveal">
-  <img src="Scary.png">
+  <img src="Scary.png" alt="">
   <div id="joke">
-    <div class="big">😂 So na you be the secret millionaire wey we get for this house?</div>
-    <div class="smalljoke">ABEG TINYERE FATHER IHE NA BOOT. 🤣🤣</div>
+    <div class="big">😂 So Na You Be The Secret Millionaire Wey We Get For This House?</div>
+    <div class="smalljoke">AH DON CASH YOU, TINYERE FATHER IHE NA BOOT OZUGBO. 🤣🤣</div>
   </div>
 </div>
 
@@ -153,16 +184,21 @@ const statusText = document.getElementById("status");
 
 setTimeout(() => {
   statusText.innerText = "Verifying reservation details...";
-}, 1400);
+}, 1000);
 
 setTimeout(() => {
   statusText.innerText = "Allocating premium seats...";
-}, 2200);
+}, 2000);
 
 setTimeout(() => {
   document.getElementById("loader").style.display = "none";
-  document.getElementById("reveal").style.display = "flex";
+  document.getElementById("blackout").style.display = "block";
 }, 3200);
+
+setTimeout(() => {
+  document.getElementById("blackout").style.display = "none";
+  document.getElementById("reveal").style.display = "flex";
+}, 3950);
 </script>
 
 </body>
